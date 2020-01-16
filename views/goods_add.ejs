@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>AdminLTE 3 | Starter</title>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/dist/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <%- include("./navbar.ejs")%>
+        <%- include("./left.ejs")%>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0 text-dark">商品数据管理</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">Starter Page</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- left column -->
+                        <div class="col-md-12">
+                            <!-- jquery validation -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">请输入商品信息 <small>请仔细核对后输入</small></h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <!-- form start -->
+                                <form role="form" action="/goods/addSub" method="POST" id="quickForm"
+                                    novalidate="novalidate">
+                                    <div class="card-body">
+                                        <div class="form-group row">
+                                            <label for="brand" class="col-sm-1  col-form-label">品牌</label>
+                                            <div class="col-sm-11">
+                                                <input type="text" name="brand" class="form-control" id="brand"
+                                                    placeholder="请输入品牌信息">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="logo" class="col-sm-1  col-form-label">LOGO</label>
+                                            <div class="col-sm-11">
+                                                <input type="text" name="logo" class="form-control" id="logo"
+                                                    placeholder="请输入LOGO信息">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="proName" class="col-sm-1  col-form-label">名称</label>
+                                            <div class="col-sm-11">
+                                                <input type="text" name="proName" class="form-control" id="proName"
+                                                    placeholder="请输入名称信息">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="proImg" class="col-sm-1  col-form-label">图片</label>
+                                            <div class="col-sm-11">
+                                                <input type="text" name="proImg" class="form-control" id="proImg"
+                                                    placeholder="请输入图片信息">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inPrice" class="col-sm-1  col-form-label">进价</label>
+                                            <div class="col-sm-11">
+                                                <input type="text" name="inPrice" class="form-control" id="inPrice"
+                                                    placeholder="请输入进价信息">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="outPrice" class="col-sm-1  col-form-label">售价</label>
+                                            <div class="col-sm-11">
+                                                <input type="text" name="outPrice" class="form-control" id="outPrice"
+                                                    placeholder="请输入售价信息">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="saleNum" class="col-sm-1  col-form-label">销量</label>
+                                            <div class="col-sm-11">
+                                                <input type="text" name="saleNum" class="form-control" id="saleNum"
+                                                    placeholder="请输入销量信息">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="stock" class="col-sm-1  col-form-label">库存</label>
+                                            <div class="col-sm-11">
+                                                <input type="text" name="stock" class="form-control" id="stock"
+                                                    placeholder="请输入库存信息">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-1  col-form-label">热门</label>
+                                            <div class="col-sm-11">
+                                                <div class="form-group">
+                                                    <div class="custom-control custom-radio">
+                                                        <input class="custom-control-input" type="radio" id="hotY"
+                                                            name="hot" value="1">
+                                                        <label for="hotY" class="custom-control-label">是</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio">
+                                                        <input class="custom-control-input" type="radio" id="hotN"
+                                                            name="hot" checked="" value="0">
+                                                        <label for="hotN" class="custom-control-label">否</label>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <!-- /.card-body -->
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-primary">提交</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                        <!--/.col (left) -->
+                        <!-- right column -->
+                        <div class="col-md-6">
+
+                        </div>
+                        <!--/.col (right) -->
+                    </div>
+                    <!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+        <%- include("./right.ejs")%>
+        <%- include("./footer.ejs")%>
+        <!-- ./wrapper -->
+
+        <!-- REQUIRED SCRIPTS -->
+
+        <!-- jQuery -->
+        <script src="/plugins/jquery/jquery.min.js"></script>
+        <!-- Bootstrap 4 -->
+        <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="/dist/js/adminlte.min.js"></script>
+</body>
+
+</html>
