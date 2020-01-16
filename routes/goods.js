@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 const uuid = require("node-uuid");
-const coll = require("./../mongo/product");
+const coll = require("./../mongo/goods");
 const sql = require("./../mongo/sql");
 const xlsx = require("node-xlsx");
 
