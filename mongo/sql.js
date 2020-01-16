@@ -51,14 +51,14 @@ module.exports = {
                     reject(data);
                 }
             });
-            if (typeof options.setting.sort === "object") {
-                find.sort(options.setting.sort);
-            }
             if (typeof options.setting.limit === "number") {
                 find.limit(options.setting.limit);
             }
             if (typeof options.setting.skip === "number") {
                 find.skip(options.setting.skip);
+            }
+            if (typeof options.setting.sort === "object") {
+                find.sort(options.setting.sort);
             }
         })
     }
