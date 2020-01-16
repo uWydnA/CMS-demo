@@ -53,6 +53,18 @@ scratch. This page gets rid of all links and provides the needed markup only.
                             <div class="card-header">
                                 <h3 class="card-title">
                                     <a href="/goods/add" class="btn btn-primary">添加商品信息</a>
+                                    <div class="form-group" style="display: inline-block;width: 600px;">
+                                        <div class="input-group">
+                                            <input id='location' class="form-control" onclick="$('#i-file').click();">
+                                            <label class="input-group-btn">
+                                                <input type="button" id="i-check" value="浏览文件" class="btn btn-primary"
+                                                    onclick="$('#i-file').click();">
+                                                <a href="/goods/upload" class="btn btn-primary">批量添加商品信息</a>
+                                            </label>
+                                        </div>
+                                        <input type="file" name="file" id='i-file' accept=".xls, .xlsx"
+                                            onchange="$('#location').val($('#i-file').val());" style="display: none">
+                                    </div>
                                 </h3>
                             </div>
                             <!-- /.card-header -->
@@ -81,7 +93,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         <th class="sorting_asc" tabindex="0" aria-controls="example2"
                                                             rowspan="1" colspan="1" aria-sort="ascending"
                                                             aria-label="Rendering engine: activate to sort column descending">
-                                                            序号</th>
+                                                            序号
+
+                                                        </th>
+
+                                                        <span></span>
                                                         <th class="sorting_asc" tabindex="0" aria-controls="example2"
                                                             rowspan="1" colspan="1" aria-sort="ascending"
                                                             aria-label="Rendering engine: activate to sort column descending">
@@ -101,19 +117,43 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                         <th class="sorting_asc" tabindex="0" aria-controls="example2"
                                                             rowspan="1" colspan="1" aria-sort="ascending"
                                                             aria-label="Rendering engine: activate to sort column descending">
-                                                            进价</th>
+                                                            进价
+                                                            <a href="/goods/sort?type=inPrice&d=1&index=<%= parseInt(fenyeIndex)-5%>"
+                                                                class="text-primary">↑</a>
+                                                            <a href="/goods/sort?type=inPrice&d=-1&index=<%= parseInt(fenyeIndex)-5%>"
+                                                                class="text-primary">↓</a>
+                                                        </th>
                                                         <th class="sorting_asc" tabindex="0" aria-controls="example2"
                                                             rowspan="1" colspan="1" aria-sort="ascending"
                                                             aria-label="Rendering engine: activate to sort column descending">
-                                                            售价</th>
+                                                            售价
+                                                            <a href="/goods/sort?type=outPrice&d=1&index=<%= parseInt(fenyeIndex)-5%>"
+                                                                class="text-primary">↑</a>
+                                                            <a href="/goods/sort?type=outPrice&d=-1&index=<%= parseInt(fenyeIndex)-5%>"
+                                                                class="text-primary">↓</a>
+                                                        </th>
                                                         <th class="sorting_asc" tabindex="0" aria-controls="example2"
                                                             rowspan="1" colspan="1" aria-sort="ascending"
                                                             aria-label="Rendering engine: activate to sort column descending">
-                                                            销量/库存</th>
+                                                            销量
+                                                            <a href="/goods/sort?type=saleNum&d=1&index=<%= parseInt(fenyeIndex)-5%>"
+                                                                class="text-primary">↑</a>
+                                                            <a href="/goods/sort?type=saleNum&d=-1&index=<%= parseInt(fenyeIndex)-5%>"
+                                                                class="text-primary">↓</a>/库存
+                                                            <a href="/goods/sort?type=stock&d=1&index=<%= parseInt(fenyeIndex)-5%>"
+                                                                class="text-primary">↑</a>
+                                                            <a href="/goods/sort?type=stock&d=-1&index=<%= parseInt(fenyeIndex)-5%>"
+                                                                class="text-primary">↓</a>
+                                                        </th>
                                                         <th class="sorting_asc" tabindex="0" aria-controls="example2"
                                                             rowspan="1" colspan="1" aria-sort="ascending"
                                                             aria-label="Rendering engine: activate to sort column descending">
-                                                            热门</th>
+                                                            热门
+                                                            <a href="/goods/sort?type=hot&d=1&index=<%= parseInt(fenyeIndex)-5%>"
+                                                                class="text-primary">↑</a>
+                                                            <a href="/goods/sort?type=hot&d=-1&index=<%= parseInt(fenyeIndex)-5%>"
+                                                                class="text-primary">↓</a>
+                                                        </th>
                                                         <th class="sorting_asc" tabindex="0" aria-controls="example2"
                                                             rowspan="1" colspan="1" aria-sort="ascending"
                                                             aria-label="Rendering engine: activate to sort column descending">
@@ -125,14 +165,19 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     <tr role="row" class="odd">
                                                         <td class="sorting_1"><%= parseInt(i)+1 %></td>
                                                         <td><%= data[i].brand%></td>
-                                                        <td><%= data[i].logo%></td>
+                                                        <td>
+                                                            <img src="<%= data[i].logo%>" alt="">
+                                                        </td>
                                                         <td><%= data[i].proName%></td>
-                                                        <td><%= data[i].proImg%></td>
+                                                        <td style="text-align: center;">
+                                                            <img src="<%= data[i].proImg%>"
+                                                                style="width: 100px;height: 100px;" alt="">
+                                                        </td>
                                                         <td><%= data[i].inPrice%></td>
                                                         <td><%= data[i].outPrice%></td>
                                                         <td><%= data[i].saleNum + '/' + (data[i].stock - data[i].saleNum)%>
                                                         </td>
-                                                        <td><%= data[i].hot%></td>
+                                                        <td><%= data[i].hot ==1 ? "是" : "否"%></td>
                                                         <td>
                                                             <a href="/goods/delete?goodId=<%=data[i].goodId%>"
                                                                 class="btn btn-danger">删除</a>
@@ -164,30 +209,26 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 id="example2_paginate">
                                                 <ul class="pagination">
                                                     <li class="paginate_button page-item previous disabled"
-                                                        id="example2_previous"><a href="#" aria-controls="example2"
-                                                            data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+                                                        id="example2_previous"><a
+                                                            href="/goods/prev?fenyeIndex=<%= fenyeIndex%>"
+                                                            aria-controls=" example2" data-dt-idx="0" tabindex="0"
+                                                            class="page-link">Previous</a>
                                                     </li>
-                                                    <li class="paginate_button page-item active"><a href="#"
-                                                            aria-controls="example2" data-dt-idx="1" tabindex="0"
-                                                            class="page-link">1</a></li>
-                                                    <li class="paginate_button page-item "><a href="#"
-                                                            aria-controls="example2" data-dt-idx="2" tabindex="0"
-                                                            class="page-link">2</a></li>
-                                                    <li class="paginate_button page-item "><a href="#"
-                                                            aria-controls="example2" data-dt-idx="3" tabindex="0"
-                                                            class="page-link">3</a></li>
-                                                    <li class="paginate_button page-item "><a href="#"
-                                                            aria-controls="example2" data-dt-idx="4" tabindex="0"
-                                                            class="page-link">4</a></li>
-                                                    <li class="paginate_button page-item "><a href="#"
-                                                            aria-controls="example2" data-dt-idx="5" tabindex="0"
-                                                            class="page-link">5</a></li>
-                                                    <li class="paginate_button page-item "><a href="#"
-                                                            aria-controls="example2" data-dt-idx="6" tabindex="0"
-                                                            class="page-link">6</a></li>
+                                                    <% for(var i=0; i<fenye.length/5;i++){ %>
+                                                    <li
+                                                        class="paginate_button page-item <%= fenyeIndex/5==i+1?"active":"" %>">
+                                                        <a href="/goods/fenyeNum?index=<%= i%>" aria-controls="example2"
+                                                            data-dt-idx="<%= i-0+1%>" tabindex='0' index="<%= i %>"
+                                                            class="page-link">
+                                                            <%= i-0+1 %>
+                                                        </a>
+                                                    </li>
+                                                    <% } %>
+
                                                     <li class="paginate_button page-item next" id="example2_next"><a
-                                                            href="#" aria-controls="example2" data-dt-idx="7"
-                                                            tabindex="0" class="page-link">Next</a></li>
+                                                            href="/goods/next?fenyeIndex=<%= fenyeIndex%>&fenye=<%= fenye.length%>"
+                                                            aria-controls="example2" data-dt-idx="7" tabindex="0"
+                                                            class="page-link">Next</a></li>
                                                 </ul>
                                             </div>
                                         </div>
