@@ -163,9 +163,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 <tbody>
                                                     <% for(var i in data){ %>
                                                     <tr role="row" class="odd">
-                                                        <td class="sorting_1"><%= parseInt(i)+1 %></td>
+                                                        <td class="sorting_1">
+                                                            <%= parseInt(i)+1 + parseInt(fenyeIndex-5) %></td>
                                                         <td><%= data[i].brand%></td>
-                                                        <td>
+                                                        <td style="text-align: center;">
                                                             <img src="<%= data[i].logo%>" alt="">
                                                         </td>
                                                         <td><%= data[i].proName%></td>
