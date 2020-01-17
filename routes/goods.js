@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 const uuid = require("node-uuid");
+const collCopy = require("./../mongo/goodsCopy");
 const coll = require("./../mongo/goods");
 const sql = require("./../mongo/sql");
 const xlsx = require("node-xlsx");
@@ -14,12 +15,11 @@ router.get('/', function (req, res, next) {
         limit: 5,
         skip: index
     }
+    let settingSort = {}
     if (req.query.type) {
         let obj = {};
         obj[req.query.type] = req.query.d;
-        setting = {
-            limit: 5,
-            skip: index,
+        settingSort = {
             sort: obj
         }
     }
@@ -27,16 +27,32 @@ router.get('/', function (req, res, next) {
         colName: coll,
         setting: setting
     }).then((data) => {
-        sql.find({
-            colName: coll,
-        }).then((fenye) => {
-            res.render("goods", {
-                data,
-                fenye,
-                fenyeIndex: (limitNum - 0) + (index - 0),
-                activeIndex: 1,
+        sql.delete({
+            colName: collCopy,
+            type: 2
+        }).then(() => {
+            sql.insert({
+                colName: collCopy,
+                data: data
+            }).then(() => {
+                sql.find({
+                    colName: collCopy,
+                    setting: settingSort
+                }).then(data => {
+                    sql.find({
+                        colName: coll,
+                    }).then((fenye) => {
+                        res.render("goods", {
+                            data,
+                            fenye,
+                            fenyeIndex: (limitNum - 0) + (index - 0),
+                            activeIndex: 1,
+                        })
+                    })
+                })
             })
         })
+
     }, (err) => {
         console.log(err)
     })
