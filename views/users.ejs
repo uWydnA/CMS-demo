@@ -52,7 +52,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">
-                                    <a href="##" class="btn btn-primary">添加用户信息</a>
+                                    <a href="/users/addSub" class="btn btn-primary">添加用户信息</a>
                                 </h3>
                             </div>
                             <!-- /.card-header -->
@@ -104,19 +104,21 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     </tr>
                                                 </thead>
                                                 <tbody>
+                                                    <% for(var i in data ){%>
                                                     <tr role="row" class="odd">
-                                                        <td class="sorting_1">1</td>
-                                                        <td>10000</td>
-                                                        <td>retr0</td>
-                                                        <td>Qh5#</td>
-                                                        <td>18084020304</td>
-                                                        <td>isandywu@outlook.com</td>
-                                                        <td>1995/7/26</td>
+                                                        <td class="sorting_1"><%= i-0+1 %></td>
+                                                        <td><%= data[i].userId%></td>
+                                                        <td><%= data[i].userName%></td>
+                                                        <td><%= data[i].pass%></td>
+                                                        <td><%= data[i].phone%></td>
+                                                        <td><%= data[i].email%></td>
+                                                        <td><%= data[i].birthday%></td>
                                                         <td>
                                                             <a href="##" class="btn btn-danger">删除</a>
                                                             <a href="##" class="btn btn-warning">修改</a>
                                                         </td>
                                                     </tr>
+                                                    <% } %>
                                                 </tbody>
                                             </table>
                                         </div>

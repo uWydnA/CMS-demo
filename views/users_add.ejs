@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>AdminLTE 3 | Starter</title>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/dist/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+
+<body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        <%- include("./navbar.ejs")%>
+        <%- include("./left.ejs")%>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0 text-dark">用户数据管理</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">Starter Page</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <!-- left column -->
+                        <div class="col-md-12">
+                            <!-- jquery validation -->
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">请输入用户信息 <small>请仔细核对后输入</small></h3>
+                                </div>
+                                <!-- /.card-header -->
+                                <!-- form start -->
+                                <form role="form" action="/users/add" method="POST" id="quickForm"
+                                    novalidate="novalidate">
+                                    <div class="card-body">
+                                        <div class="form-group row">
+                                            <label for="userId" class="col-sm-1  col-form-label">用户ID</label>
+                                            <div class="col-sm-11">
+                                                <input type="text" name="userId" class="form-control" id="userId"
+                                                    placeholder="请输入用户ID信息">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="userName" class="col-sm-1  col-form-label">用户名</label>
+                                            <div class="col-sm-11">
+                                                <input type="text" name="userName" class="form-control" id="userName"
+                                                    placeholder="请输入用户名信息">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="pass" class="col-sm-1  col-form-label">密码</label>
+                                            <div class="col-sm-11">
+                                                <input type="text" name="pass" class="form-control" id="proName"
+                                                    placeholder="请输入密码信息">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="phone" class="col-sm-1  col-form-label">手机号</label>
+                                            <div class="col-sm-11">
+                                                <input type="text" name="phone" class="form-control" id="phone"
+                                                    placeholder="请输入手机号信息">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="email" class="col-sm-1  col-form-label">邮箱</label>
+                                            <div class="col-sm-11">
+                                                <input type="text" name="email" class="form-control" id="inPremailice"
+                                                    placeholder="请输入邮箱信息">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="brithday" class="col-sm-1  col-form-label">生日</label>
+                                            <div class="col-sm-11">
+                                                <input type="text" name="brithday" class="form-control" id="brithday"
+                                                    placeholder="请输入生日信息">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /.card-body -->
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-primary">提交</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                        <!--/.col (left) -->
+                        <!-- right column -->
+                        <div class="col-md-6">
+
+                        </div>
+                        <!--/.col (right) -->
+                    </div>
+                    <!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+
+        <%- include("./right.ejs")%>
+        <%- include("./footer.ejs")%>
+        <!-- ./wrapper -->
+
+        <!-- REQUIRED SCRIPTS -->
+
+        <!-- jQuery -->
+        <script src="/plugins/jquery/jquery.min.js"></script>
+        <!-- Bootstrap 4 -->
+        <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="/dist/js/adminlte.min.js"></script>
+</body>
+
+</html>
