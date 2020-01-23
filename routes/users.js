@@ -65,4 +65,12 @@ router.post("/update", function (req, res, next) {
   })
 })
 
+router.get("/deleteSub", function (req, res, next) {
+  sql.delete({
+    colName: coll,
+    where: req.query
+  }).then(() => {
+    res.redirect("/users");
+  })
+})
 module.exports = router;
