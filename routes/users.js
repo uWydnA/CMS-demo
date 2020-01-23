@@ -4,15 +4,29 @@ var router = express.Router();
 const sql = require("./../mongo/sql");
 const coll = require("./../mongo/users")
 const uuid = require("node-uuid");
+const xlsx = require("node-xlsx");
 
+let index = 0;
+let pageNum = 5;
 /* GET users listing. */
 router.get('/', function (req, res, next) {
   sql.find({
-    colName: coll
+    colName: coll,
+    setting: {
+      limit: pageNum,
+      skip: index * pageNum
+    }
   }).then(data => {
-    res.render("users", {
-      activeIndex: 2,
-      data
+    sql.find({
+      colName: coll
+    }).then(all => {
+      res.render("users", {
+        activeIndex: 2,
+        data,
+        all,
+        pageNum,
+        index
+      })
     })
   })
 });
@@ -23,7 +37,25 @@ router.get("/addSub", function (req, res, next) {
   })
 })
 router.get("/addMore", function (req, res, next) {
-
+  let data = [];
+  xlsx.parse("/media/retr0/新加卷1/Express/day03/myapp/addMore/usersMore.xls")[0].data.forEach((ele, idx) => {
+    if (idx >= 1) {
+      data.push({
+        userId: uuid.v1(),
+        userName: ele[0],
+        pass: ele[1],
+        phone: ele[2],
+        email: ele[3],
+        birthday: ele[4],
+      })
+    }
+  })
+  sql.insert({
+    colName: coll,
+    data
+  }).then(data => {
+    res.redirect("/users")
+  })
 })
 router.post("/add", function (req, res, next) {
   sql.find({
