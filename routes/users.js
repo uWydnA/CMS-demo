@@ -41,4 +41,28 @@ router.post("/add", function (req, res, next) {
   })
 })
 
+router.get("/updateSub", function (req, res, next) {
+  sql.find({
+    colName: coll,
+    where: req.query
+  }).then(data => {
+    res.render("users_update", {
+      activeIndex: 2,
+      data: data[0]
+    })
+  })
+})
+
+router.post("/update", function (req, res, next) {
+  sql.update({
+    colName: coll,
+    where: {
+      userId: req.body.userId
+    },
+    newdata: req.body
+  }).then(() => {
+    res.redirect("/users")
+  })
+})
+
 module.exports = router;
