@@ -3,6 +3,7 @@ var router = express.Router();
 
 const sql = require("./../mongo/sql");
 const coll = require("./../mongo/users")
+const uuid = require("node-uuid");
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
@@ -21,6 +22,9 @@ router.get("/addSub", function (req, res, next) {
     activeIndex: 2
   })
 })
+router.get("/addMore", function (req, res, next) {
+
+})
 router.post("/add", function (req, res, next) {
   sql.find({
     colName: coll,
@@ -29,9 +33,11 @@ router.post("/add", function (req, res, next) {
     }
   }).then(data => {
     if (data.length < 1) {
+      let obj = req.body;
+      obj.userId = uuid.v1();
       sql.insert({
         colName: coll,
-        data: req.body
+        data: obj
       }).then(() => {
         res.redirect("/users");
       })
