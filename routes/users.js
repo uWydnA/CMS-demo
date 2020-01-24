@@ -14,7 +14,7 @@ router.get('/', function (req, res, next) {
     colName: coll,
     setting: {
       limit: pageNum,
-      skip: index * pageNum
+      skip: index * pageNum || 0
     }
   }).then(data => {
     sql.find({
@@ -110,5 +110,19 @@ router.get("/deleteSub", function (req, res, next) {
   }).then(() => {
     res.redirect("/users");
   })
+})
+
+router.get("/next", function (req, res, next) {
+  if (parseInt(req.query.index) >= Math.floor(req.query.data / pageNum)) {
+    index = 0
+  } else {
+    index++;
+  }
+  res.redirect(`/users`)
+})
+
+router.get("/fenyeNum", function (req, res, next) {
+  index = req.query.fenyeNum;
+  res.redirect(`/users`)
 })
 module.exports = router;

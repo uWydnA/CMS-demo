@@ -107,7 +107,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 <tbody>
                                                     <% for(var i in data ){%>
                                                     <tr role="row" class="odd">
-                                                        <td class="sorting_1"><%= i-0+1 %></td>
+                                                        <td class="sorting_1"><%= i-0+1 + index*pageNum %></td>
                                                         <td><%= data[i].userId%></td>
                                                         <td><%= data[i].userName%></td>
                                                         <td><%= data[i].pass%></td>
@@ -142,13 +142,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     <% for(var i=0;i<all.length/pageNum;i++){ %>
                                                     <li
                                                         class="paginate_button page-item <%= i == index ? "active":""%>">
-                                                        <a href="#" aria-controls="example2" data-dt-idx="<%= i-0+1%>"
+                                                        <a href="/users/fenyeNum?fenyeNum=<%= i%>"
+                                                            aria-controls="example2" data-dt-idx="<%= i-0+1%>"
                                                             tabindex="<%= i-0%>" class="page-link"><%= i-0+1%></a>
                                                     </li>
                                                     <% } %>
                                                     <li class="paginate_button page-item next" id="example2_next"><a
-                                                            href="#" aria-controls="example2" data-dt-idx="7"
-                                                            tabindex="0" class="page-link">Next</a></li>
+                                                            href="users/next?index=<%=index%>&data=<%= all.length%>"
+                                                            aria-controls="example2" data-dt-idx="7" tabindex="0"
+                                                            class="page-link">Next</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -173,9 +175,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- REQUIRED SCRIPTS -->
 
         <!-- jQuery -->
-        <script src="/plugins/jquery/jquery.min.js"></script>
-        <!-- Bootstrap 4 -->
-        <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="/plugins/jquery/jquery.min.js"> </script> <!-- Bootstrap 4 -->
+        <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js">
+        </script>
         <!-- AdminLTE App -->
         <script src="/dist/js/adminlte.min.js"></script>
 </body>
