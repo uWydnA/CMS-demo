@@ -46,72 +46,124 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <!-- /.content-header -->
 
             <!-- Main content -->
-            <div class="content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-
-                                    <p class="card-text">
-                                        Some quick example text to build on the card title and make up the bulk of the
-                                        card's
-                                        content.
-                                    </p>
-
-                                    <a href="#" class="card-link">Card link</a>
-                                    <a href="#" class="card-link">Another link</a>
+            <section class="content">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <a href="/order/addSub" class="btn btn-primary">添加订单信息</a>
+                                    <a href="/order/addMore" class="btn btn-primary">批量添加信息</a>
+                                </h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-6"></div>
+                                        <div class="col-sm-12 col-md-6"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <table id="example2" class="table table-bordered table-hover dataTable"
+                                                role="grid" aria-describedby="example2_info">
+                                                <thead>
+                                                    <tr role="row">
+                                                        <th class="sorting_asc" tabindex="0" aria-controls="example2"
+                                                            rowspan="1" colspan="1" aria-sort="ascending"
+                                                            aria-label="Rendering engine: activate to sort column descending">
+                                                            序号</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example2"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Browser: activate to sort column ascending">
+                                                            用户ID</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example2"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Platform(s): activate to sort column ascending">
+                                                            用户名</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example2"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="Engine version: activate to sort column ascending">
+                                                            订单信息</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example2"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="CSS grade: activate to sort column ascending">
+                                                            品牌</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example2"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="CSS grade: activate to sort column ascending">
+                                                            名称</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example2"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="CSS grade: activate to sort column ascending">
+                                                            售价</th>
+                                                        <th class="sorting" tabindex="0" aria-controls="example2"
+                                                            rowspan="1" colspan="1"
+                                                            aria-label="CSS grade: activate to sort column ascending">
+                                                            操作</th>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <% for(var i in data ){%>
+                                                    <tr role="row" class="odd">
+                                                        <td class="sorting_1"><%= i-0+1 + index*pageNum %></td>
+                                                        <td><%= data[i].userId%></td>
+                                                        <td><%= data[i].userName%></td>
+                                                        <td><%= data[i].orderInfo%></td>
+                                                        <td><%= data[i].brand%></td>
+                                                        <td><%= data[i].proName%></td>
+                                                        <td><%= data[i].outPrice%></td>
+                                                        <td>
+                                                            <a href="/order/deleteSub?userId=<%= data[i].userId%>"
+                                                                class=" btn btn-danger">删除</a>
+                                                            <a href="/order/updateSub?userId=<%= data[i].userId%>"
+                                                                class="btn btn-warning">修改</a>
+                                                        </td>
+                                                    </tr>
+                                                    <% } %>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-12 col-md-5">
+                                            <div class="dataTables_info" id="example2_info" role="status"
+                                                aria-live="polite">Showing 1 to 10 of 57 entries</div>
+                                        </div>
+                                        <div class="col-sm-12 col-md-7">
+                                            <div class="dataTables_paginate paging_simple_numbers"
+                                                id="example2_paginate">
+                                                <ul class="pagination">
+                                                    <li class="paginate_button page-item previous disabled"
+                                                        id="example2_previous"><a href="#" aria-controls="example2"
+                                                            data-dt-idx="0" tabindex="0" class="page-link">Previous</a>
+                                                    </li>
+                                                    <% for(var i=0;i<all.length/pageNum;i++){ %>
+                                                    <li
+                                                        class="paginate_button page-item <%= i == index ? "active":""%>">
+                                                        <a href="/order/fenyeNum?fenyeNum=<%= i%>"
+                                                            aria-controls="example2" data-dt-idx="<%= i-0+1%>"
+                                                            tabindex="<%= i-0%>" class="page-link"><%= i-0+1%></a>
+                                                    </li>
+                                                    <% } %>
+                                                    <li class="paginate_button page-item next" id="example2_next"><a
+                                                            href="order/next?index=<%=index%>&data=<%= all.length%>"
+                                                            aria-controls="example2" data-dt-idx="7" tabindex="0"
+                                                            class="page-link">Next</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="card card-primary card-outline">
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-
-                                    <p class="card-text">
-                                        Some quick example text to build on the card title and make up the bulk of the
-                                        card's
-                                        content.
-                                    </p>
-                                    <a href="#" class="card-link">Card link</a>
-                                    <a href="#" class="card-link">Another link</a>
-                                </div>
-                            </div><!-- /.card -->
+                            <!-- /.card-body -->
                         </div>
-                        <!-- /.col-md-6 -->
-                        <div class="col-lg-6">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5 class="m-0">Featured</h5>
-                                </div>
-                                <div class="card-body">
-                                    <h6 class="card-title">Special title treatment</h6>
-
-                                    <p class="card-text">With supporting text below as a natural lead-in to additional
-                                        content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                                </div>
-                            </div>
-
-                            <div class="card card-primary card-outline">
-                                <div class="card-header">
-                                    <h5 class="m-0">Featured</h5>
-                                </div>
-                                <div class="card-body">
-                                    <h6 class="card-title">Special title treatment</h6>
-
-                                    <p class="card-text">With supporting text below as a natural lead-in to additional
-                                        content.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- /.col-md-6 -->
                     </div>
-                    <!-- /.row -->
-                </div><!-- /.container-fluid -->
-            </div>
+                    <!-- /.col -->
+                </div>
+                <!-- /.row -->
+            </section>
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
@@ -123,9 +175,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
         <!-- REQUIRED SCRIPTS -->
 
         <!-- jQuery -->
-        <script src="/plugins/jquery/jquery.min.js"></script>
-        <!-- Bootstrap 4 -->
-        <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="/plugins/jquery/jquery.min.js"> </script> <!-- Bootstrap 4 -->
+        <script src="/plugins/bootstrap/js/bootstrap.bundle.min.js">
+        </script>
         <!-- AdminLTE App -->
         <script src="/dist/js/adminlte.min.js"></script>
 </body>
