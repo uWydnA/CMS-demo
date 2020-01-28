@@ -75,16 +75,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                             序号</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example2"
                                                             rowspan="1" colspan="1"
-                                                            aria-label="Browser: activate to sort column ascending">
-                                                            用户ID</th>
+                                                            aria-label="Engine version: activate to sort column ascending">
+                                                            订单信息</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example2"
                                                             rowspan="1" colspan="1"
                                                             aria-label="Platform(s): activate to sort column ascending">
                                                             用户名</th>
-                                                        <th class="sorting" tabindex="0" aria-controls="example2"
-                                                            rowspan="1" colspan="1"
-                                                            aria-label="Engine version: activate to sort column ascending">
-                                                            订单信息</th>
                                                         <th class="sorting" tabindex="0" aria-controls="example2"
                                                             rowspan="1" colspan="1"
                                                             aria-label="CSS grade: activate to sort column ascending">
@@ -108,16 +104,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                     <% for(var i in data ){%>
                                                     <tr role="row" class="odd">
                                                         <td class="sorting_1"><%= i-0+1 + index*pageNum %></td>
-                                                        <td><%= data[i].userId%></td>
-                                                        <td><%= data[i].userName%></td>
                                                         <td><%= data[i].orderInfo%></td>
+                                                        <td><%= data[i].userName%></td>
                                                         <td><%= data[i].brand%></td>
                                                         <td><%= data[i].proName%></td>
                                                         <td><%= data[i].outPrice%></td>
                                                         <td>
-                                                            <a href="/order/deleteSub?userId=<%= data[i].userId%>"
+                                                            <a href="/order/deleteSub?userName=<%= data[i].userName%>"
                                                                 class=" btn btn-danger">删除</a>
-                                                            <a href="/order/updateSub?userId=<%= data[i].userId%>"
+                                                            <a href="/order/updateSub?userName=<%= data[i].userName%>"
                                                                 class="btn btn-warning">修改</a>
                                                         </td>
                                                     </tr>

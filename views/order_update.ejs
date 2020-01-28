@@ -58,13 +58,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                 </div>
                                 <!-- /.card-header -->
                                 <!-- form start -->
-                                <form role="form" action="/users/update" method="POST" id="quickForm"
+                                <form role="form" action="/order/update" method="POST" id="quickForm"
                                     novalidate="novalidate">
                                     <div class="card-body">
                                         <div class="form-group row">
-                                            <label for="userId" class="col-sm-1  col-form-label">用户ID</label>
+                                            <label for="userName" class="col-sm-1  col-form-label">用户ID</label>
                                             <div class="col-sm-11">
-                                                <input type="text" name="userId" class="form-control" id="userId"
+                                                <input type="text" name="userName" class="form-control" id="userName"
                                                     value="<%= data.userId %>" readonly>
                                             </div>
                                         </div>
@@ -72,37 +72,31 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                             <label for="userName" class="col-sm-1  col-form-label">用户名</label>
                                             <div class="col-sm-11">
                                                 <input type="text" name="userName" class="form-control" id="userName"
-                                                    value="<%= data.userName %>">
+                                                    value="<%= data.userName %>" readonly>
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="pass" class="col-sm-1  col-form-label">密码</label>
+                                            <label for="brand" class="col-sm-1  col-form-label">品牌</label>
                                             <div class="col-sm-11">
-                                                <input type="text" name="pass" class="form-control" id="proName"
-                                                    value="<%= data.pass %>">
+                                                <input type="text" name="brand" class="form-control" id="brand"
+                                                    value="<%= data.brand %>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="phone" class="col-sm-1  col-form-label">手机号</label>
+                                            <label for="proName" class="col-sm-1  col-form-label">名称</label>
                                             <div class="col-sm-11">
-                                                <input type="text" name="phone" class="form-control" id="phone"
-                                                    value="<%= data.phone %>">
+                                                <input type="text" name="phone" class="form-control" id="proName"
+                                                    value="<%= data.proName %>">
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="email" class="col-sm-1  col-form-label">邮箱</label>
+                                            <label for="outPrice" class="col-sm-1  col-form-label">售价</label>
                                             <div class="col-sm-11">
-                                                <input type="text" name="email" class="form-control" id="inPremailice"
-                                                    value="<%= data.email %>">
+                                                <input type="text" name="outPrice" class="form-control" id="outPrice"
+                                                    value="<%= data.outPrice %>">
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label for="birthday" class="col-sm-1  col-form-label">生日</label>
-                                            <div class="col-sm-11">
-                                                <input type="text" name="birthday" class="form-control" id="birthday"
-                                                    value="<%= data.birthday %>">
-                                            </div>
-                                        </div>
+
                                     </div>
                                     <!-- /.card-body -->
                                     <div class="card-footer">

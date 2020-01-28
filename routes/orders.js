@@ -3,6 +3,7 @@ var router = express.Router();
 
 const sql = require("./../mongo/sql");
 const coll = require("./../mongo/order")
+const collUsers = require("./../mongo/users")
 const uuid = require("node-uuid");
 const xlsx = require("node-xlsx");
 
@@ -41,12 +42,11 @@ router.get("/addMore", function (req, res, next) {
     xlsx.parse("/media/retr0/新加卷1/Express/day03/myapp/addMore/orderMore.xls")[0].data.forEach((ele, idx) => {
         if (idx >= 1) {
             data.push({
-                userId: uuid.v1(),
+                orderInfo: uuid.v1(),
                 userName: ele[0],
-                pass: ele[1],
-                phone: ele[2],
-                email: ele[3],
-                birthday: ele[4],
+                brand: ele[1],
+                proName: ele[2],
+                outPrice: ele[3],
             })
         }
     })
@@ -59,7 +59,6 @@ router.get("/addMore", function (req, res, next) {
 })
 router.post("/add", function (req, res, next) {
     let obj = req.body;
-    obj.userId = uuid.v1();
     obj.orderInfo = uuid.v1();
     sql.insert({
         colName: coll,
@@ -71,7 +70,7 @@ router.post("/add", function (req, res, next) {
 
 router.get("/updateSub", function (req, res, next) {
     sql.find({
-        colName: coll,
+        colName: collUsers,
         where: req.query
     }).then(data => {
         res.render("order_update", {
@@ -85,7 +84,7 @@ router.post("/update", function (req, res, next) {
     sql.update({
         colName: coll,
         where: {
-            userId: req.body.userId
+            userName: req.body.userName
         },
         newdata: req.body
     }).then(() => {
